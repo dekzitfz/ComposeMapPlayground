@@ -2,16 +2,25 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.secrets.gradlePlugin)
+}
+
+secrets {
+    propertiesFileName = "local.properties"
+    defaultPropertiesFileName = "local.properties"
+    ignoreList.add("keyToIgnore") // Ignore the key "keyToIgnore"
+    ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
 }
 
 android {
     namespace = "id.adiandrea.mapplayground"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "id.adiandrea.mapplayground"
         minSdk = 28
-        targetSdk = 34
+        //noinspection EditedTargetSdkVersion
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -36,6 +45,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -56,4 +66,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.maps.compose)
+    implementation(libs.play.service.maps)
 }
