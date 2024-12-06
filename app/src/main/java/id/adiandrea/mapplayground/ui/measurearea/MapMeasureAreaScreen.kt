@@ -18,6 +18,7 @@ import com.google.maps.android.compose.MarkerComposable
 import com.google.maps.android.compose.Polygon
 import com.google.maps.android.compose.rememberMarkerState
 import id.adiandrea.mapplayground.ui.theme.MapPlaygroundTheme
+import java.text.DecimalFormat
 
 @Preview
 @Composable
@@ -55,8 +56,41 @@ fun MapMeasureAreaScreen() {
                         strokePattern = arrayListOf(Dash(10f), Gap(4f)),
                         fillColor = Color(0x404b94f5)
                     )
+
+                    if (locationPoints.size > 2) {
+                        AreaMarker(locationPoints.toList())
+                    }
                 }
             }
         }
     }
+}
+
+fun List<LatLng>.getCenterLocation(): LatLng {
+    var centerLat = 0.0
+    var centerLng = 0.0
+
+    for (point in this) {
+        centerLat += point.latitude
+        centerLng += point.longitude
+    }
+
+    centerLat /= this.size
+    centerLng /= this.size
+
+    return LatLng(centerLat, centerLng)
+}
+
+fun Double.formatDecimal(): String {
+    val decimalFormat = DecimalFormat("#.00")
+    return decimalFormat.format(this)
+}
+
+fun Double.makeItReadable(): String {
+    return if (this < 1000000.0) {
+        "${this.formatDecimal()} m²"
+    } else {
+        "${(this / 1000000.0).formatDecimal()} km²"
+    }
+
 }

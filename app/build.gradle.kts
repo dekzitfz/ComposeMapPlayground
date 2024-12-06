@@ -73,4 +73,6 @@ dependencies {
 
     implementation(libs.kotlin.serialization)
     implementation(libs.androidx.navigation)
+
+    implementation(libs.map.utils)
 }

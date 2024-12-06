@@ -14,6 +14,7 @@ secretsGradlePlugin = "2.0.1"
 gmsPlugin = "4.4.2"
 serialization = "1.7.3"
 navigation = "2.8.4"
+mapUtils = "3.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,6 +35,7 @@ maps-compose = { group = "com.google.maps.android", name = "maps-compose", versi
 play-service-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "play-service-maps" }
 kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+map-utils = { group = "com.google.maps.android", name = "android-maps-utils", version.ref = "mapUtils" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
