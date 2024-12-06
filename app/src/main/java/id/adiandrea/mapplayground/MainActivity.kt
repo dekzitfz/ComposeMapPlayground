@@ -11,6 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import id.adiandrea.mapplayground.navigation.Screen
+import id.adiandrea.mapplayground.ui.home.HomeScreen
+import id.adiandrea.mapplayground.ui.measurearea.MapMeasureAreaScreen
 import id.adiandrea.mapplayground.ui.theme.MapPlaygroundTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,30 +24,22 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MapPlaygroundTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+            val navController = rememberNavController()
+            NavHost(
+                navController = navController,
+                startDestination = Screen.Home
+            ) {
+                composable<Screen.Home> {
+                    HomeScreen(
+                        onMeasureAreaSelected = {
+                            navController.navigate(Screen.MapMeasureArea)
+                        }
                     )
+                }
+                composable<Screen.MapMeasureArea> {
+                    MapMeasureAreaScreen()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MapPlaygroundTheme {
-        Greeting("Android")
     }
 }

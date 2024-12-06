@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.secrets.gradlePlugin)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 secrets {
@@ -69,4 +70,7 @@ dependencies {
 
     implementation(libs.maps.compose)
     implementation(libs.play.service.maps)
+
+    implementation(libs.kotlin.serialization)
+    implementation(libs.androidx.navigation)
 }
